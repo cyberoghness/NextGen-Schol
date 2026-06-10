@@ -59,7 +59,9 @@ export function AdmissionForm() {
   const isSenior = data.studentClass === "11" || data.studentClass === "12";
   const baseOptional = ["Computer Science", "Hindi", "Fashion Studies", "Mechatronics"];
   const optionalChoices =
-    isSenior && data.stream === "Commerce" ? [...baseOptional, "Mathematics"] : baseOptional;
+    isSenior && data.stream === "Commerce"
+      ? [...baseOptional, "Mathematics (Only visible if Commerce selected)"]
+      : baseOptional;
 
   const update = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setData((d) => ({ ...d, [k]: v }));
@@ -242,7 +244,7 @@ export function AdmissionForm() {
         <div className="sm:col-span-2">
           <label className={labelCls}>Board</label>
           <div className="flex flex-wrap gap-2">
-            {["CBSE", "ICSE", "ISC"].map((b) => (
+            {["CBSE", "ISCE/ISC"].map((b) => (
               <label
                 key={b}
                 className={`cursor-pointer rounded-xl border px-4 py-2 text-sm font-medium transition ${
@@ -317,7 +319,7 @@ export function AdmissionForm() {
                       : "border-border bg-white/70 hover:border-primary/40"
                   }`}
                 >
-                  {s}
+                  {s === "Mathematics (Only visible if Commerce selected)" ? "Mathematics" : s}
                 </button>
               );
             })}
